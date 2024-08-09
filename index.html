@@ -1,0 +1,260 @@
+<html> 
+
+<head>
+
+
+  <style>
+
+  /* Global styles */
+  * {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Chat container */
+  .chat-container {
+    width: 500px;
+    height: 700px;
+    border: 1px solid #f452cb;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Chat header */
+  .chat-header {
+    background-color: #aff811;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .chat-actions {
+    display: flex;
+  }
+  
+  .chat-action {
+    margin-left: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .chat-action:hover {
+    background-color: #3e8e41;
+  }
+  
+  /* Chat messages */
+  .chat-messages {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  
+  .message {
+    margin-bottom: 20px;
+    display: flex;
+  }
+  
+  .message-avatar {
+    margin-right: 10px;
+  }
+  
+  .message-avatar img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  
+  .message-content {
+    flex-grow: 1;
+  }
+  
+  .username {
+    font-weight: bold;
+    color: #00698f;
+  }
+  
+  .message-text {
+    color: #666;
+  }
+  
+  .message-timestamp {
+    color: #999;
+    font-size: 12px;
+  }
+  
+  /* Chat input */
+  .chat-input {
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    display: flex;
+  }
+  
+  #message-input {
+    flex-grow: 1;
+    height: 30px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  #send-btn {
+    width: 20%;
+    height: 30px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  #send-btn:hover {
+    background-color: #3e8e41;
+  }
+
+
+</style>
+<style>
+
+    /* Your existing styles */
+    .chat-container.dark {
+      background-color: #333;
+      color: #fff;
+    }
+  </style>
+
+
+
+</head>
+<body>
+
+
+    <center>
+<!-- Chat container -->
+<div class="chat-container">
+  <!-- Chat header -->
+  <div class="chat-header">
+    <h2>Chat App</h2>
+    <div class="chat-actions">
+      <button class="chat-action" id="new-message-btn">New Message</button>
+      <button class="chat-action" id="settings-btn">Settings</button>
+    </div>
+  </div>
+  <!-- Chat messages -->
+  <div class="chat-messages">
+    <!-- Message 1 -->
+    <div class="message">
+      <div class="message-avatar">
+        <img src="img1.png" alt="keerthi avatar">
+      </div>
+      <div class="message-content">
+        <span class="username">keerthi : </span>
+        <span class="message-text">Hello!</span>
+        <span class="message-timestamp">10:05 AM</span>
+      </div>
+    </div>
+    <!-- Message 2 -->
+    <div class="message">
+      <div class="message-avatar">
+        <img src="butterfly.png" alt="butterfly">
+      </div>
+      <div class="message-content">
+        <span class="username">Nani : </span>
+        <span class="message-text">Hi!</span>
+        <span class="message-timestamp">10:09 AM </span>
+      </div>
+    </div>
+    <!-- Add more messages here -->
+  </div>
+  <!-- Chat input -->
+  <div class="chat-input">
+    <input type="text" placeholder="Type a message..." id="message-input">&NonBreakingSpace;&NonBreakingSpace;
+    <button id="send-btn">Send</button>
+  </div>
+</div>
+
+</center>
+
+<script>
+
+
+// Get the elements
+const messageInput = document.getElementById('message-input');
+const sendBtn = document.getElementById('send-btn');
+const chatMessages = document.querySelector('.chat-messages');
+
+// Add an event listener to the send button
+sendBtn.addEventListener('click', () => {
+  // Get the message input by the user
+  const message = messageInput.value.trim();
+
+  // Check if the message is not empty
+  if (message !== '') {
+    // Create a new message element
+    const newMessage = document.createElement('div');
+    newMessage.className = 'message';
+
+    // Create the message avatar
+    const avatar = document.createElement('div');
+    avatar.className = 'message-avatar';
+    const img = document.createElement('img');
+    img.src ="img1.jpeg";
+    img.alt = 'User avatar';
+    avatar.appendChild(img);
+
+    // Create the message content
+    const messageContent = document.createElement('div');
+    messageContent.className = 'message-content';
+    const username = document.createElement('span');
+    username.className = 'username';
+    username.textContent = 'You : ';
+    const messageText = document.createElement('span');
+    messageText.className = 'message-text';
+    messageText.textContent = message;
+    const timestamp = document.createElement('span');
+    timestamp.className = 'message-timestamp';
+    timestamp.textContent = new Date().toLocaleTimeString();
+    messageContent.appendChild(username);
+    messageContent.appendChild(messageText);
+    messageContent.appendChild(timestamp);
+
+    // Append the message to the chat window
+    newMessage.appendChild(avatar);
+    newMessage.appendChild(messageContent);
+    chatMessages.appendChild(newMessage);
+
+    // Clear the message input
+    messageInput.value = '';
+  }
+});
+
+
+</script>
+<script>
+  // Settings variables
+  let theme = 'light';
+  let showTimestamps = true;
+
+  // Show settings panel
+  document.getElementById('settings-btn').addEventListener('click', () => {
+    document.getElementById('settings-panel').style.display = 'block';
+  });
+
+  // Save settings
+  document.getElementById('save-settings-btn').addEventListener('click', () => {
+    theme = document.getElementById('theme-select').value;
+    showTimestamps = document.getElementById('timestamps-checkbox').checked;
+    document.getElementById('chat-container').classList.toggle('dark', theme === 'dark');
+    document.getElementById('settings-panel').style.display = 'none';
+  });
+</script>
+
+</body>
+</html>
